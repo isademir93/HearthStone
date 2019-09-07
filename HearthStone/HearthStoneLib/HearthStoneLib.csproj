@@ -45,7 +45,8 @@
     <Compile Include="Card.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="HandCards.cs" />
+    <Compile Include="HearthStoneGame.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

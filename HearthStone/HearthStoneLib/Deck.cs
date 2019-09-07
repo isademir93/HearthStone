@@ -2,7 +2,12 @@
 
 namespace HearthStoneLib
 {
-    public class Deck
+    public interface IDeck
+    {
+        ICard GetNextCard();
+    }
+
+    internal class Deck : IDeck
     {
         private Stack<Card> Cards { get; set; }
 
@@ -17,7 +22,7 @@ namespace HearthStoneLib
             }
         }
 
-        public Card GetNextCard()
+        public ICard GetNextCard()
         {
             if (Cards.Count > 0)
             {

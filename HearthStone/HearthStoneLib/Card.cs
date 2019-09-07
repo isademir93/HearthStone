@@ -1,10 +1,15 @@
 ﻿namespace HearthStoneLib
 {
-    public class Card
+    public interface ICard
+    {
+        int ManaCost { get; }
+    }
+
+    internal class Card : ICard
     {
         public int ManaCost { get; private set; }
 
-        public Card(int manaCost)
+        internal Card(int manaCost)
         {
             ManaCost = manaCost;
         }

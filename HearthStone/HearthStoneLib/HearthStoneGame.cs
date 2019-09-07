@@ -1,23 +1,41 @@
 ﻿namespace HearthStoneLib
 {
-    public class Game
+    public interface IHearthStoneGame
+    {
+        IPlayer PlayerA { get; }
+        IPlayer PlayerB { get; }
+
+        bool IsFirstPlayerActive { get; }
+
+        bool GameOver { get; }
+
+        bool EndPlayerTurn();
+    }
+
+    public class HearthStoneGame : IHearthStoneGame
     {
         static readonly int[] InitialCardManas = { 0, 0, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 7, 8 };
 
-        public Player PlayerA { get; private set; }
-        public Player PlayerB { get; private set; }
+        public IPlayer PlayerA { get; private set; }
+        public IPlayer PlayerB { get; private set; }
 
-        public Player AttackerPlayer { get { return GetPlayer(IsFirstPlayerActive); } }
-        public Player DefenderPlayer { get { return GetPlayer(!IsFirstPlayerActive); } }
+        Player AttackerPlayer { get { return GetPlayer(IsFirstPlayerActive); } }
+
+        Player DefenderPlayer { get { return GetPlayer(!IsFirstPlayerActive); } }
 
         public bool IsFirstPlayerActive { get; private set; }
 
         public bool GameOver { get; private set; }
 
-        public Game()
+        private HearthStoneGame()
         {
             InitializePlayers();
             IsFirstPlayerActive = true;
+        }
+
+        public static IHearthStoneGame CreateGame()
+        {
+            return new HearthStoneGame();
         }
 
         private void InitializePlayers()
@@ -46,13 +64,13 @@
             for (int i = 0; i < 3; i++)
             {
                 var card = deck.GetNextCard();
-                player.AddCardToHand(card);
+                player.Hand.AddCard(card);
             }
         }
 
         private Player GetPlayer(bool isFirstPlayer)
         {
-            return isFirstPlayer ? PlayerA : PlayerB;
+            return isFirstPlayer ? (Player)PlayerA : (Player)PlayerB;
         }
 
         public bool EndPlayerTurn()
@@ -76,7 +94,7 @@
                 {
                     var defender = DefenderPlayer;
 
-                    var attackCard = attacker.Hand[selectedHandCardIndex];
+                    var attackCard = attacker.Hand.Cards[selectedHandCardIndex];
                     if (attackCard != null)
                     {
                         var mana = attackCard.ManaCost;
@@ -85,7 +103,7 @@
                             attacker.ManaSlot -= mana;
                             defender.Health -= mana;
 
-                            attacker.Hand[selectedHandCardIndex] = null;
+                            attacker.Hand.Cards[selectedHandCardIndex] = null;
 
                             if (defender.Health <= 0)
                             {
@@ -121,9 +139,9 @@
 
                     if (newCard != null)
                     {
-                        if (attacker.EmptySlotCount > 0)
+                        if (attacker.Hand.EmptySlotCount > 0)
                         {
-                            attacker.AddCardToHand(newCard);
+                            attacker.Hand.AddCard(newCard);
                             return AcquiredCardFromDeckResult.Success;
                         }
 

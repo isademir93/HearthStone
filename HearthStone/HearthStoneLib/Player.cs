@@ -1,42 +1,34 @@
-﻿using System.Linq;
-
-namespace HearthStoneLib
+﻿namespace HearthStoneLib
 {
-    public class Player
+    public interface IPlayer
+    {
+        bool AcquiredCardFromDeckInTurn { get; }
+
+        int Health { get; set; }
+
+        int ManaSlot { get; set; }
+
+        IHand Hand { get; }
+
+        IDeck Deck { get; }
+    }
+
+    internal class Player : IPlayer
     {
         public int Health { get; set; }
+
         public int ManaSlot { get; set; }
 
-        public Card[] Hand { get; private set; }
+        public IHand Hand { get; private set; }
 
-        public Deck Deck { get; private set; }
+        public IDeck Deck { get; private set; }
 
-        public bool AcquiredCardFromDeckInTurn { get; set; }
+        public bool AcquiredCardFromDeckInTurn { get; internal set; }
 
-
-        public Player(int maxHandSlotCount, Deck deck)
+        public Player(int handSize, Deck deck)
         {
-            Hand = new Card[maxHandSlotCount];
+            Hand = new Hand(handSize);
             Deck = deck;
-        }
-
-        public int EmptySlotCount { get { return Hand.Count(c => c == null); } }
-
-        public bool AddCardToHand(Card card)
-        {
-            if (EmptySlotCount > 0)
-            {
-                for (int i = 0; i < Hand.Length; i++)
-                {
-                    if (Hand[i] == null)
-                    {
-                        Hand[i] = card;
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
     }
 }
