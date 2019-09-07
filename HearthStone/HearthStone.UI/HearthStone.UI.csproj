@@ -49,16 +49,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CardView.Designer.cs">
+      <DependentUpon>CardView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeckView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DeckView.Designer.cs">
+      <DependentUpon>DeckView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GamePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GamePanel.Designer.cs">
+      <DependentUpon>GamePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlayerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PlayerView.Designer.cs">
+      <DependentUpon>PlayerView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CardView.resx">
+      <DependentUpon>CardView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeckView.resx">
+      <DependentUpon>DeckView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GamePanel.resx">
+      <DependentUpon>GamePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayerView.resx">
+      <DependentUpon>PlayerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -85,6 +121,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\HeathStone.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HearthStoneLib\HearthStoneLib.csproj">
+      <Project>{9d2e1f2c-6ebb-467d-9030-fab01b2325f4}</Project>
+      <Name>HearthStoneLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HeathStoneCardBack.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

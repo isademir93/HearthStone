@@ -69,5 +69,15 @@ namespace HearthStone.UI.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeathStoneCardBack {
+            get {
+                object obj = ResourceManager.GetObject("HeathStoneCardBack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
