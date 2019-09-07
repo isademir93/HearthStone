@@ -11,6 +11,8 @@ namespace HearthStoneLib
 
         public Deck Deck { get; private set; }
 
+        public bool AcquiredCardFromDeckInTurn { get; set; }
+
 
         public Player(int maxHandSlotCount, Deck deck)
         {
