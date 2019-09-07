@@ -28,30 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.playerView1 = new HearthStone.UI.PlayerView();
-            this.playerView2 = new HearthStone.UI.PlayerView();
             this.endTurnButton = new System.Windows.Forms.Button();
+            this.playerB = new HearthStone.UI.PlayerView();
+            this.playerA = new HearthStone.UI.PlayerView();
             this.SuspendLayout();
-            // 
-            // playerView1
-            // 
-            this.playerView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.playerView1.Location = new System.Drawing.Point(3, 3);
-            this.playerView1.Name = "playerView1";
-            this.playerView1.Player = null;
-            this.playerView1.Size = new System.Drawing.Size(250, 350);
-            this.playerView1.TabIndex = 0;
-            this.playerView1.ViewType = HearthStone.UI.PlayerViewType.Left;
-            // 
-            // playerView2
-            // 
-            this.playerView2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.playerView2.Location = new System.Drawing.Point(259, 3);
-            this.playerView2.Name = "playerView2";
-            this.playerView2.Player = null;
-            this.playerView2.Size = new System.Drawing.Size(250, 350);
-            this.playerView2.TabIndex = 1;
-            this.playerView2.ViewType = HearthStone.UI.PlayerViewType.Right;
             // 
             // endTurnButton
             // 
@@ -65,14 +45,39 @@
             this.endTurnButton.TabIndex = 2;
             this.endTurnButton.Text = "End Turn";
             this.endTurnButton.UseVisualStyleBackColor = false;
+            this.endTurnButton.Click += new System.EventHandler(this.endTurnButton_Click);
+            // 
+            // playerB
+            // 
+            this.playerB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.playerB.Location = new System.Drawing.Point(259, 3);
+            this.playerB.Name = "playerB";
+            this.playerB.Player = null;
+            this.playerB.Size = new System.Drawing.Size(250, 350);
+            this.playerB.TabIndex = 1;
+            this.playerB.ViewType = HearthStone.UI.PlayerViewType.Right;
+            this.playerB.CardClicked += new HearthStone.UI.PlayerCardClicked(this.player_CardClicked);
+            this.playerB.DeckClicked += new HearthStone.UI.PlayerDeckClicked(this.player_DeckClicked);
+            // 
+            // playerA
+            // 
+            this.playerA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.playerA.Location = new System.Drawing.Point(3, 3);
+            this.playerA.Name = "playerA";
+            this.playerA.Player = null;
+            this.playerA.Size = new System.Drawing.Size(250, 350);
+            this.playerA.TabIndex = 0;
+            this.playerA.ViewType = HearthStone.UI.PlayerViewType.Left;
+            this.playerA.CardClicked += new HearthStone.UI.PlayerCardClicked(this.player_CardClicked);
+            this.playerA.DeckClicked += new HearthStone.UI.PlayerDeckClicked(this.player_DeckClicked);
             // 
             // GamePanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.endTurnButton);
-            this.Controls.Add(this.playerView2);
-            this.Controls.Add(this.playerView1);
+            this.Controls.Add(this.playerB);
+            this.Controls.Add(this.playerA);
             this.Name = "GamePanel";
             this.Size = new System.Drawing.Size(512, 400);
             this.ResumeLayout(false);
@@ -81,8 +86,8 @@
 
         #endregion
 
-        private PlayerView playerView1;
-        private PlayerView playerView2;
+        private PlayerView playerA;
+        private PlayerView playerB;
         private System.Windows.Forms.Button endTurnButton;
     }
 }

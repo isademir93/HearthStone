@@ -16,5 +16,14 @@ namespace HearthStone.UI
         {
             InitializeComponent();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            gamePanel1.ShowGameInfo();
+        }
     }
 }

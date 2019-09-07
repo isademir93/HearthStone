@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace HearthStone.UI
 {
+    public delegate void PlayerCardClicked(IPlayer player, int cardIndex);
+    public delegate void PlayerDeckClicked(IPlayer player);
+
     public enum PlayerViewType
     {
         Left,
@@ -16,6 +19,9 @@ namespace HearthStone.UI
 
         bool initializing;
 
+        public event PlayerCardClicked CardClicked;
+        public event PlayerDeckClicked DeckClicked;
+
         CardView[] Cards { get; set; }
 
         public IPlayer Player
@@ -24,6 +30,16 @@ namespace HearthStone.UI
             set
             {
                 player = value;
+
+
+                deck.Deck = player?.Deck;
+
+                for (int i = 0; i < Cards.Length; i++)
+                {
+                    var card = Cards[i];
+                    card.CardIndex = i;
+                    card.Hand = player?.Hand;
+                }
 
                 RenderView();
             }
@@ -70,14 +86,34 @@ namespace HearthStone.UI
             RenderView();
         }
 
-        private void RenderView()
+        public void RenderView()
         {
             if (!initializing)
             {
                 cardPanel.Left = ViewType == PlayerViewType.Left ? 197 : 0;
                 deck.Left = ViewType == PlayerViewType.Left ? 3 : 204;
-                infoPanel.Left = ViewType == PlayerViewType.Left ? 3 : 127;                
+                infoPanel.Left = ViewType == PlayerViewType.Left ? 3 : 127;
+
+                healthValueLabel.Text = Player != null ? Player.Health.ToString() : string.Empty;
+                manaValueLabel.Text = Player != null ? Player.TurnMana.ToString() : string.Empty;
+
+                deck.RenderView();
+
+                foreach (var card in Cards)
+                {
+                    card.RenderView();
+                }
             }
+        }
+
+        private void CardView_CardClicked(int cardIndex)
+        {
+            CardClicked?.Invoke(Player, cardIndex);
+        }
+
+        private void deck_DeckClicked()
+        {
+            DeckClicked?.Invoke(Player);
         }
     }
 }

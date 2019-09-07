@@ -3,11 +3,26 @@ using System.Windows.Forms;
 
 namespace HearthStone.UI
 {
+    public delegate void CardClickedEventHandler(int cardIndex);
+
     public partial class CardView : UserControl
     {
         private IHand hand;
 
+        public IHand Hand
+        {
+            get => hand;
+            set
+            {
+                hand = value;
+
+                RenderView();
+            }
+        }
+
         public int CardIndex { get; set; }
+
+        public event CardClickedEventHandler CardClicked;
 
         public CardView()
         {
@@ -19,17 +34,6 @@ namespace HearthStone.UI
         {
             Hand = hand;
             CardIndex = cardIndex;
-        }
-
-        public IHand Hand
-        {
-            get => hand;
-            private set
-            {
-                hand = value;
-
-                RenderView();
-            }
         }
 
         public void RenderView()
@@ -47,6 +51,11 @@ namespace HearthStone.UI
                     BackColor = System.Drawing.SystemColors.ActiveCaption;
                 }
             }
+        }
+
+        private void CardView_Click(object sender, System.EventArgs e)
+        {
+            CardClicked?.Invoke(CardIndex);
         }
     }
 }

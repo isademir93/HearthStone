@@ -51,6 +51,7 @@
             this.Controls.Add(this.countLabel);
             this.Name = "DeckView";
             this.Size = new System.Drawing.Size(43, 64);
+            this.Click += new System.EventHandler(this.DeckView_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 

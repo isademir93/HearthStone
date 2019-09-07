@@ -52,6 +52,7 @@
             this.deck.Name = "deck";
             this.deck.Size = new System.Drawing.Size(43, 64);
             this.deck.TabIndex = 0;
+            this.deck.DeckClicked += new HearthStone.UI.DeckClickedEventHandler(this.deck_DeckClicked);
             // 
             // cardView1
             // 
@@ -62,6 +63,7 @@
             this.cardView1.Name = "cardView1";
             this.cardView1.Size = new System.Drawing.Size(43, 64);
             this.cardView1.TabIndex = 1;
+            this.cardView1.CardClicked += new HearthStone.UI.CardClickedEventHandler(this.CardView_CardClicked);
             // 
             // cardView2
             // 
@@ -72,6 +74,7 @@
             this.cardView2.Name = "cardView2";
             this.cardView2.Size = new System.Drawing.Size(43, 64);
             this.cardView2.TabIndex = 2;
+            this.cardView2.CardClicked += new HearthStone.UI.CardClickedEventHandler(this.CardView_CardClicked);
             // 
             // cardView3
             // 
@@ -82,6 +85,7 @@
             this.cardView3.Name = "cardView3";
             this.cardView3.Size = new System.Drawing.Size(43, 64);
             this.cardView3.TabIndex = 4;
+            this.cardView3.CardClicked += new HearthStone.UI.CardClickedEventHandler(this.CardView_CardClicked);
             // 
             // cardView4
             // 
@@ -92,6 +96,7 @@
             this.cardView4.Name = "cardView4";
             this.cardView4.Size = new System.Drawing.Size(43, 64);
             this.cardView4.TabIndex = 3;
+            this.cardView4.CardClicked += new HearthStone.UI.CardClickedEventHandler(this.CardView_CardClicked);
             // 
             // cardView5
             // 
@@ -102,6 +107,7 @@
             this.cardView5.Name = "cardView5";
             this.cardView5.Size = new System.Drawing.Size(43, 64);
             this.cardView5.TabIndex = 5;
+            this.cardView5.CardClicked += new HearthStone.UI.CardClickedEventHandler(this.CardView_CardClicked);
             // 
             // healtLabel
             // 

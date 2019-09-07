@@ -2,14 +2,24 @@
 
 namespace HearthStoneLib
 {
+    public delegate void GameOverEventHandler(IPlayer winner);
+
     public interface IHearthStoneGame
     {
         IPlayer PlayerA { get; }
         IPlayer PlayerB { get; }
 
+        IPlayer ActivePlayer { get; }
+
         bool IsFirstPlayerActive { get; }
 
         bool GameOver { get; }
+
+        event GameOverEventHandler GameOvered;
+
+        AcquiredCardFromDeckResult AcquireCardFromDeck();
+
+        AttackResult Attack(int selectedHandCardIndex);
 
         bool EndPlayerTurn();
     }
@@ -21,13 +31,31 @@ namespace HearthStoneLib
         public IPlayer PlayerA { get; private set; }
         public IPlayer PlayerB { get; private set; }
 
+        public IPlayer ActivePlayer { get { return AttackerPlayer; } }
+
         Player AttackerPlayer { get { return GetPlayer(IsFirstPlayerActive); } }
 
         Player DefenderPlayer { get { return GetPlayer(!IsFirstPlayerActive); } }
 
         public bool IsFirstPlayerActive { get; private set; }
 
-        public bool GameOver { get; private set; }
+        public event GameOverEventHandler GameOvered;
+
+        private bool gameOver;
+        public bool GameOver
+        {
+            get => gameOver;
+            private set
+            {
+                gameOver = value;
+
+                if (gameOver)
+                {
+                    GameOvered?.Invoke(PlayerA.Health <= 0 ? PlayerB : PlayerA);
+                }
+            }
+        }
+
 
         private HearthStoneGame()
         {
@@ -159,6 +187,14 @@ namespace HearthStoneLib
                         }
 
                         return AcquiredCardFromDeckResult.HandIsFull;
+                    }
+
+                    attacker.Health--;
+
+                    if (attacker.Health <= 0)
+                    {
+                        GameOver = true;
+                        return AcquiredCardFromDeckResult.GameOver;
                     }
 
                     return AcquiredCardFromDeckResult.DeckIsEmpty;

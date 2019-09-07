@@ -41,6 +41,7 @@
             this.manaCostLabel.Size = new System.Drawing.Size(33, 32);
             this.manaCostLabel.TabIndex = 0;
             this.manaCostLabel.Text = "3";
+            this.manaCostLabel.Click += new System.EventHandler(this.CardView_Click);
             // 
             // CardView
             // 
@@ -51,6 +52,7 @@
             this.Controls.Add(this.manaCostLabel);
             this.Name = "CardView";
             this.Size = new System.Drawing.Size(43, 64);
+            this.Click += new System.EventHandler(this.CardView_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
