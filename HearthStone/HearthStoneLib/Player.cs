@@ -6,7 +6,9 @@
 
         int Health { get; set; }
 
-        int ManaSlot { get; set; }
+        int ManaSlot { get; }
+
+        int TurnMana { get; }
 
         IHand Hand { get; }
 
@@ -17,7 +19,9 @@
     {
         public int Health { get; set; }
 
-        public int ManaSlot { get; set; }
+        public int ManaSlot { get; internal set; }
+
+        public int TurnMana { get; internal set; }
 
         public IHand Hand { get; private set; }
 

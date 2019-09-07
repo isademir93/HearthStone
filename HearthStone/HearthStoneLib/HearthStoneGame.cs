@@ -1,4 +1,6 @@
-﻿namespace HearthStoneLib
+﻿using System;
+
+namespace HearthStoneLib
 {
     public interface IHearthStoneGame
     {
@@ -30,7 +32,7 @@
         private HearthStoneGame()
         {
             InitializePlayers();
-            IsFirstPlayerActive = true;
+            SetAttacker(true);
         }
 
         public static IHearthStoneGame CreateGame()
@@ -77,11 +79,22 @@
         {
             if (!GameOver)
             {
-                AttackerPlayer.AcquiredCardFromDeckInTurn = false;
-                IsFirstPlayerActive = !IsFirstPlayerActive;
+                var attacker = AttackerPlayer;
+                attacker.ManaSlot = Math.Min(attacker.ManaSlot + 1, 10);
+                attacker.AcquiredCardFromDeckInTurn = false;
+
+                SetAttacker(!IsFirstPlayerActive);
             }
 
             return !GameOver;
+        }
+
+        private void SetAttacker(bool isFirstPlayer)
+        {
+            IsFirstPlayerActive = isFirstPlayer;
+
+            var attacker = AttackerPlayer;
+            attacker.TurnMana = attacker.ManaSlot;
         }
 
         public AttackResult Attack(int selectedHandCardIndex)
@@ -98,9 +111,9 @@
                     if (attackCard != null)
                     {
                         var mana = attackCard.ManaCost;
-                        if (attacker.ManaSlot >= mana)
+                        if (attacker.TurnMana >= mana)
                         {
-                            attacker.ManaSlot -= mana;
+                            attacker.TurnMana -= mana;
                             defender.Health -= mana;
 
                             attacker.Hand.Cards[selectedHandCardIndex] = null;
