@@ -108,13 +108,19 @@ namespace HearthStoneLib
             if (!GameOver)
             {
                 var attacker = AttackerPlayer;
-                attacker.ManaSlot = Math.Min(attacker.ManaSlot + 1, 10);
-                attacker.AcquiredCardFromDeckInTurn = false;
 
-                SetAttacker(!IsFirstPlayerActive);
+                if (attacker.AcquiredCardFromDeckInTurn)
+                {
+                    attacker.ManaSlot = Math.Min(attacker.ManaSlot + 1, 10);
+                    attacker.AcquiredCardFromDeckInTurn = false;
+
+                    SetAttacker(!IsFirstPlayerActive);
+
+                    return true;
+                }
             }
 
-            return !GameOver;
+            return false;
         }
 
         private void SetAttacker(bool isFirstPlayer)

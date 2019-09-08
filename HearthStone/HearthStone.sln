@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearthStoneLib", "HearthSto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearthStone.UI", "HearthStone.UI\HearthStone.UI.csproj", "{10D28224-CB83-48A6-BDBE-3D71B3D8DBA1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearthStoneLibTest", "HearthStoneLibTest\HearthStoneLibTest.csproj", "{C0583EA5-D658-4DD0-BA62-CAAB59D1DF20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{10D28224-CB83-48A6-BDBE-3D71B3D8DBA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10D28224-CB83-48A6-BDBE-3D71B3D8DBA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10D28224-CB83-48A6-BDBE-3D71B3D8DBA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0583EA5-D658-4DD0-BA62-CAAB59D1DF20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0583EA5-D658-4DD0-BA62-CAAB59D1DF20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0583EA5-D658-4DD0-BA62-CAAB59D1DF20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0583EA5-D658-4DD0-BA62-CAAB59D1DF20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
